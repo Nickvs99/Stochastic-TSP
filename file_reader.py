@@ -10,4 +10,5 @@ def read_file(filename):
 
     return x_list, y_list
 
-print(read_file('TSP-Configurations/pcb442.tsp.txt'))
+# Example usage
+# print(read_file('TSP-Configurations/pcb442.tsp.txt'))
