@@ -1,10 +1,14 @@
-
+"""
+This file is responsible for various functions related to calculating distances.
+"""
 
 def create_distance_table(x_values, y_values):
     """
-    Creates a dictionary with the distance between node i and j.
+    Creates a dictionary with the distance city i and city j.
 
-
+    Returns:
+        distance_table: dictionary<int, dictionary<int, float>>
+        int's refer to the cities and float refers to the distance between the cities
     """
 
     distance_table = {}
@@ -30,3 +34,14 @@ def create_distance_table(x_values, y_values):
 def calc_distance(x1, y1, x2, y2):
 
     return ((x2 - x1) ** 2 + (y2 - y1) ** 2) ** 0.5
+
+def calc_path_length(city_order, dist_table):
+    
+    path_length = 0
+    for i in range(len(city_order) - 1):
+        city1 = city_order[i]
+        city2 = city_order[i + 1]
+
+        path_length += dist_table[city1][city2]
+    
+    return path_length
