@@ -3,10 +3,12 @@ def read_file(filename):
     y_list = []
 
     with open(filename, "r") as f:
+        print(filename[-12:])
         for line in f.readlines()[6:-1]:
             split_line = line.split(' ')
-            x_list.append(float(split_line[1]))
-            y_list.append(float(split_line[2]))
+            split_line = [x for x in split_line if x]
+            x_list.append(float(split_line[-2]))
+            y_list.append(float(split_line[-1]))
 
     return x_list, y_list
 
