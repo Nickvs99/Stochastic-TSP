@@ -8,6 +8,7 @@ def run(a, b, dist_table):
 
     n_cities = 51
     current_order = [i for i in range(1, n_cities + 1)]
+    current_order.append(1)
     current_score = distance.calc_path_length(current_order, dist_table)
     
     orders = [current_order]

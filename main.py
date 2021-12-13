@@ -7,19 +7,18 @@ from plot import plot
 import simulated_annealing
 
 
-def two_opt(order, edge_1, edge_2):
-    if edge_2 < edge_1:
-        edge_1, edge_2 = edge_2, edge_1
+def two_opt(order, city_1, city_2):
+    if city_2 < city_1:
+        city_1, city_2 = city_2, city_1
     new_order = np.zeros(len(order))
-    new_order[:edge_1] = order[:edge_1]
-    new_order[edge_1:edge_2] = list(reversed(order[edge_1:edge_2]))
-    new_order[edge_2:] = order[edge_2:]
+    new_order[:city_1] = order[:city_1]
+    new_order[city_1:city_2] = list(reversed(order[city_1:city_2]))
+    new_order[city_2:] = order[city_2:]
     new_order = [int(i) for i in new_order]
-    if edge_1 == 0:
+    if city_1 == 0:
         new_order[-1] = new_order[0]
-    if edge_2 == len(new_order):
+    if city_2 == len(new_order):
         new_order[0] = new_order[-1]
-    print(new_order)
     return new_order
 
 
@@ -31,9 +30,11 @@ def main():
 
 
     scores, orders = simulated_annealing.run(1, 1, dist_table)
-    print(scores)
 
-    plot(x_values, y_values, orders[0])
+    #plot(x_values, y_values, orders[0])
+    print(orders[-1])
+    print(scores[-1])
     plot(x_values, y_values, orders[-1])
+    
 if __name__ == "__main__":
     main()
