@@ -4,6 +4,7 @@ import numpy as np
 import distance
 from file_reader import read_file, read_solution
 from plot import plot
+import simulated_annealing
 
 
 def two_opt(order, edge_1, edge_2):
@@ -28,16 +29,11 @@ def main():
 
     dist_table = distance.create_distance_table(x_values, y_values)
 
-    # TEMP, create a random order of cities
-    city_order = [i for i in range(1, 52)]
-    random.shuffle(city_order)
-    city_order = read_solution(f"TSP-Configurations/{filename}.opt.tour.txt")
-    city_order = two_opt(city_order, 10, 52)
 
-    path_length = distance.calc_path_length(city_order, dist_table)
-    print(path_length)
+    scores, orders = simulated_annealing.run(1, 1, dist_table)
+    print(scores)
 
-    plot(x_values, y_values, city_order)
-
+    plot(x_values, y_values, orders[0])
+    plot(x_values, y_values, orders[-1])
 if __name__ == "__main__":
     main()
