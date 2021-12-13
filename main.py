@@ -3,7 +3,7 @@ import numpy as np
 
 import distance
 from file_reader import read_file, read_solution
-from plot import plot
+from plot import plot, plot_scores
 import simulated_annealing
 
 
@@ -29,11 +29,12 @@ def main():
 
     dist_table = distance.create_distance_table(x_values, y_values)
 
-
     scores, orders = simulated_annealing.run(1, 1, dist_table)
     print(scores)
 
-    plot(x_values, y_values, orders[0])
-    plot(x_values, y_values, orders[-1])
+    # plot(x_values, y_values, orders[0])
+    # plot(x_values, y_values, orders[-1])
+
+    plot_scores(scores)
 if __name__ == "__main__":
     main()
