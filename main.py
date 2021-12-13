@@ -3,7 +3,7 @@ import numpy as np
 
 import distance
 from file_reader import read_file, read_solution
-from plot import plot
+from plot import plot, plot_scores
 import simulated_annealing
 
 
@@ -27,7 +27,6 @@ def main():
     x_values, y_values = read_file(f"TSP-Configurations/{filename}.tsp.txt")
 
     dist_table = distance.create_distance_table(x_values, y_values)
-
 
     scores, orders = simulated_annealing.run(1, 1, dist_table)
 
