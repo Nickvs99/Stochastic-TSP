@@ -4,9 +4,9 @@ import random
 import distance
 import main
 
-def run(a, b, dist_table):
+def run(a, b, dist_table, iterations=10000):
 
-    n_cities = 51
+    n_cities = len(dist_table)
     current_order = [i for i in range(1, n_cities + 1)]
     current_order.append(1)
     current_score = distance.calc_path_length(current_order, dist_table)
@@ -14,8 +14,7 @@ def run(a, b, dist_table):
     orders = [current_order]
     scores = [current_score]
 
-    for i in range(1000):
-
+    for i in range(iterations):
 
         edge1 = random.randint(0, n_cities - 1)
         edge2 = random.randint(0, n_cities - 1)

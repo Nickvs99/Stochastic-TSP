@@ -28,12 +28,16 @@ def main():
 
     dist_table = distance.create_distance_table(x_values, y_values)
 
-    scores, orders = simulated_annealing.run(1, 1, dist_table)
+    scores, orders = simulated_annealing.run(1000, 10, dist_table, iterations=1000000)
 
-    #plot(x_values, y_values, orders[0])
-    print(orders[-1])
-    print(scores[-1])
-    plot(x_values, y_values, orders[-1])
+    index = scores.index(min(scores))
+    optimal_route = orders[index]
     
+    print(orders[index])
+    print(scores[index]) 
+    
+    plot_scores(scores)
+    plot(x_values, y_values, optimal_route)
+
 if __name__ == "__main__":
     main()
