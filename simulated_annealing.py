@@ -4,13 +4,8 @@ import random
 import distance
 import main
 
-<<<<<<< HEAD
 def run(a, b, n, dist_table):
     temp_list = []
-=======
-def run(a, b, dist_table, iterations=10000):
-
->>>>>>> d5b2df232220fbaca8466ce6253b96a1fd6382bc
     n_cities = len(dist_table)
     current_order = [i for i in range(1, n_cities + 1)]
     current_order.append(1)

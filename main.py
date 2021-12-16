@@ -93,8 +93,8 @@ def main():
     plt.show()
     plt.plot(np.arange(n-1), temp_list)
     plt.show()
-        print(f"Saving data to {cache_filename}")
-        save_data(cache_filename, data, best_score, best_order)
+    print(f"Saving data to {cache_filename}")
+    save_data(cache_filename, data, best_score, best_order)
 
     plot_data(data)
     
