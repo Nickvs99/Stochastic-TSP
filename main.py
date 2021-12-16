@@ -31,7 +31,7 @@ def generate_data(a_values, b_values, nruns, dist_table, iterations=10000):
     
     for a in a_values:
         for b in b_values:
-            print(f"\rCalculating a={a}, b={b}...", end="")
+            print(f"\rCalculating a={a}, b={b}...", end="", flush=True)
             score_results = []
 
             for _ in range(nruns):
@@ -62,7 +62,7 @@ def load_data(filename):
 
 def main():
     n = 10000
-    filename = 'a280'
+    filename = 'eil51'
     cache_filename = f"data/{filename}.pickle"
     
     x_values, y_values = read_file(f"TSP-Configurations/{filename}.tsp.txt")
@@ -76,10 +76,12 @@ def main():
     else:
         print(f"Calculating cached data for {cache_filename}")
 
-        a_values = [1, 10, 100, 1000, 10000]
+        a_values = [0.01, 0.1, 1, 10, 100]
         b_values = [1, 10, 100, 1000, 10000]
         data, best_score, best_order = generate_data(a_values, b_values, 25, dist_table)
 
+        print(f"Saving data to {cache_filename}")
+        save_data(cache_filename, data, best_score, best_order)
 
     plot_data(data)
     print(best_score)
