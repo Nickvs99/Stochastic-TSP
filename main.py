@@ -80,26 +80,5 @@ def main():
         b_values = [1, 10, 100, 1000, 10000]
         data, best_score, best_order = generate_data(a_values, b_values, 25, dist_table)
 
-    afstand = distance.calc_path_length(route, dist_table)
-    print(afstand)
-    scores, orders, temp_list = simulated_annealing.run(50, 20, n, dist_table)
-
-    #plot(x_values, y_values, orders[0])
-    print(min(scores))
-    index = scores.index(min(scores))
-    route = orders[index]
-    plot(x_values, y_values, route)
-    plt.plot(np.arange(n), scores)
-    plt.show()
-    plt.plot(np.arange(n-1), temp_list)
-    plt.show()
-    print(f"Saving data to {cache_filename}")
-    save_data(cache_filename, data, best_score, best_order)
-
-    plot_data(data)
-    
-    print(best_score)
-    plot(x_values, y_values, best_order)
-
 if __name__ == "__main__":
     main()

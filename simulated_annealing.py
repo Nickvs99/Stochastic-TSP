@@ -4,7 +4,7 @@ import random
 import distance
 import main
 
-def run(a, b, n, dist_table):
+def run(a, b, dist_table, iterations=10000):
     temp_list = []
     n_cities = len(dist_table)
     current_order = [i for i in range(1, n_cities + 1)]
@@ -16,7 +16,7 @@ def run(a, b, n, dist_table):
     scores = [current_score]
     last_value = np.inf
 
-    for i in range(n-1):
+    for i in range(iterations):
 
 
         edge1 = random.randint(0, n_cities - 1)
@@ -40,7 +40,7 @@ def run(a, b, n, dist_table):
 
         last_value = current_score
 
-    return scores, orders, temp_list
+    return scores, orders
        
 def is_excepted(value, last_value, temperature):
     return random.random() < acceptance_change(value, last_value, temperature)     
