@@ -10,7 +10,6 @@ def run(a, b, dist_table, iterations=10000):
     current_order = [i for i in range(1, n_cities + 1)]
     current_order.append(1)
     current_score = distance.calc_path_length(current_order, dist_table)
-    print(current_score)
     
     orders = [current_order]
     scores = [current_score]
@@ -46,7 +45,7 @@ def is_excepted(value, last_value, temperature):
     return random.random() < acceptance_change(value, last_value, temperature)     
 
 def calc_temp(a, b, n):
-    return a / np.log(n + b)
+    return a / np.log(n + b + 1)
 
 def acceptance_change(value, last_value, temperature):
     return np.exp(-(value - last_value) / temperature)

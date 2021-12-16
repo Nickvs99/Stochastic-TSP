@@ -61,8 +61,8 @@ def load_data(filename):
         return pickle.load(f)
 
 def main():
-    n = 1000000
-    filename = 'eil51'
+    n = 10000
+    filename = 'a280'
     cache_filename = f"data/{filename}.pickle"
     
     x_values, y_values = read_file(f"TSP-Configurations/{filename}.tsp.txt")
@@ -79,6 +79,11 @@ def main():
         a_values = [1, 10, 100, 1000, 10000]
         b_values = [1, 10, 100, 1000, 10000]
         data, best_score, best_order = generate_data(a_values, b_values, 25, dist_table)
+
+
+    plot_data(data)
+    print(best_score)
+    plot(x_values, y_values, best_order)
 
 if __name__ == "__main__":
     main()

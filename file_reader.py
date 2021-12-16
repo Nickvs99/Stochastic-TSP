@@ -3,7 +3,7 @@ def read_file(filename):
     y_list = []
 
     with open(filename, "r") as f:
-        print(filename[-12:])
+        print(filename)
         for line in f.readlines()[6:-1]:
             split_line = line.split(' ')
             split_line = [x for x in split_line if x]
