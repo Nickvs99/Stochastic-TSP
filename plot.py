@@ -21,3 +21,49 @@ def plot_scores(scores):
     plt.xlabel("Iteration")
     plt.ylabel("Distance")
     plt.show()
+
+def plot_data(data):
+
+    for a in data:
+        
+        fig, ax = plt.subplots()
+
+        for b in data[a]:
+
+            score_results = np.array(data[a][b])
+            n_iterations = len(score_results[0])
+
+            ys = np.mean(score_results, axis=0)
+            ci = np.std(score_results, axis=0)
+            xs = range(0, n_iterations)
+            
+            ax.plot(xs,ys, label=f"b={b}")
+            ax.fill_between(xs, ys - ci, ys + ci, alpha=.1)
+
+        ax.set_xlabel("Iterations")
+        ax.set_ylabel("Scores")
+        plt.title(f"a={a}")
+        plt.legend()
+        plt.show()
+
+    for b in data[list(data.keys())[0]]:
+
+        fig, ax = plt.subplots()
+
+        for a in data:
+
+            score_results = np.array(data[a][b])
+            n_iterations = len(score_results[0])
+
+            ys = np.mean(score_results, axis=0)
+            ci = np.std(score_results, axis=0)
+            xs = range(0, n_iterations)
+            
+            ax.plot(xs,ys, label=f"a={a}")
+            ax.fill_between(xs, ys - ci, ys + ci, alpha=.1)
+        
+        ax.set_xlabel("Iterations")
+        ax.set_ylabel("Scores")
+        plt.title(f"b={b}")
+        plt.legend()
+        plt.show()
