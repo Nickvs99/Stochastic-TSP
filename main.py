@@ -1,10 +1,7 @@
 import numpy as np
-<<<<<<< HEAD
 import matplotlib.pyplot as plt
-=======
 import os
 import pickle
->>>>>>> d5b2df232220fbaca8466ce6253b96a1fd6382bc
 
 import distance
 from file_reader import read_file, read_solution
@@ -69,11 +66,8 @@ def main():
     cache_filename = f"data/{filename}.pickle"
     
     x_values, y_values = read_file(f"TSP-Configurations/{filename}.tsp.txt")
-<<<<<<< HEAD
     route = read_solution(f"TSP-Configurations/{filename}.opt.tour.txt")
 
-=======
->>>>>>> d5b2df232220fbaca8466ce6253b96a1fd6382bc
     dist_table = distance.create_distance_table(x_values, y_values)
     
     if os.path.isfile(cache_filename):
@@ -86,7 +80,6 @@ def main():
         b_values = [1, 10, 100, 1000, 10000]
         data, best_score, best_order = generate_data(a_values, b_values, 25, dist_table)
 
-<<<<<<< HEAD
     afstand = distance.calc_path_length(route, dist_table)
     print(afstand)
     scores, orders, temp_list = simulated_annealing.run(50, 20, n, dist_table)
@@ -100,12 +93,10 @@ def main():
     plt.show()
     plt.plot(np.arange(n-1), temp_list)
     plt.show()
-=======
         print(f"Saving data to {cache_filename}")
         save_data(cache_filename, data, best_score, best_order)
 
     plot_data(data)
->>>>>>> d5b2df232220fbaca8466ce6253b96a1fd6382bc
     
     print(best_score)
     plot(x_values, y_values, best_order)
