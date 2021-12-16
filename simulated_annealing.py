@@ -4,7 +4,7 @@ import random
 import distance
 import main
 
-def run(a, b, dist_table, iterations=10000):
+def run(a, b, dist_table, iterations=10000, chain_length=1):
     temp_list = []
     n_cities = len(dist_table)
     current_order = [i for i in range(1, n_cities + 1)]
@@ -28,7 +28,8 @@ def run(a, b, dist_table, iterations=10000):
         temp_order = main.two_opt(current_order, edge1, edge2)
         temp_score = distance.calc_path_length(temp_order, dist_table)
 
-        temperature = calc_temp(a, b, i)
+        if i % chain_length == 0:
+            temperature = calc_temp(a, b, i/chain_length)
         temp_list.append(temperature)
         if temp_score < current_score or is_excepted(temp_score, last_value, temperature):
             current_score = temp_score

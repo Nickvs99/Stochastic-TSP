@@ -23,7 +23,7 @@ def two_opt(order, city_1, city_2):
         new_order[0] = new_order[-1]
     return new_order
 
-def generate_data(a_values, b_values, nruns, dist_table, iterations=10000):
+def generate_data(a_values, b_values, nruns, dist_table, iterations=10000, chain_length=1):
 
     data = {}
     best_score = np.inf
@@ -36,7 +36,7 @@ def generate_data(a_values, b_values, nruns, dist_table, iterations=10000):
 
             for _ in range(nruns):
 
-                scores, orders = simulated_annealing.run(a, b, dist_table, iterations=iterations)
+                scores, orders = simulated_annealing.run(a, b, dist_table, iterations=iterations, chain_length=2)
                 score_results.append(scores)
 
                 min_score = min(scores)
@@ -78,7 +78,7 @@ def main():
 
         a_values = [0.01, 0.1, 1, 10, 100]
         b_values = [1, 10, 100, 1000, 10000]
-        data, best_score, best_order = generate_data(a_values, b_values, 25, dist_table)
+        data, best_score, best_order = generate_data(a_values, b_values, 25, dist_table, chain_length=1000)
 
         print(f"Saving data to {cache_filename}")
         save_data(cache_filename, data, best_score, best_order)
