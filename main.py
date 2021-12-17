@@ -5,7 +5,7 @@ import pickle
 
 import distance
 from file_reader import read_file, read_solution
-from plot import plot, plot_scores, plot_data
+from plot import plot, plot_scores, plot_data, plot_best_difference
 import simulated_annealing
 
 
@@ -61,12 +61,11 @@ def load_data(filename):
         return pickle.load(f)
 
 def main():
-    n = 10000
     filename = 'eil51'
     cache_filename = f"data/{filename}.pickle"
     
     x_values, y_values = read_file(f"TSP-Configurations/{filename}.tsp.txt")
-    route = read_solution(f"TSP-Configurations/{filename}.opt.tour.txt")
+    optimal_order = read_solution(f"TSP-Configurations/{filename}.opt.tour.txt")
 
     dist_table = distance.create_distance_table(x_values, y_values)
     
@@ -77,15 +76,18 @@ def main():
         print(f"Calculating cached data for {cache_filename}")
 
         a_values = [0.01, 0.1, 1, 10, 100]
-        b_values = [1, 10, 100, 1000, 10000]
-        data, best_score, best_order = generate_data(a_values, b_values, 25, dist_table, chain_length=1000)
+        b_values = [1, 10, 100, 1000, 100000]
+        data, best_score, best_order = generate_data(a_values, b_values, 25, dist_table, chain_length=1, iterations=100000)
 
         print(f"Saving data to {cache_filename}")
         save_data(cache_filename, data, best_score, best_order)
 
+    optimal_score = distance.calc_path_length(optimal_order, dist_table)
+    print(optimal_score, best_score)
+    
+    plot_best_difference(data, optimal_score)
     plot_data(data)
-    print(best_score)
-    plot(x_values, y_values, best_order)
+    plot(x_values, y_values, optimal_order)
 
 if __name__ == "__main__":
     main()

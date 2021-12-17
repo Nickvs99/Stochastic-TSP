@@ -67,3 +67,32 @@ def plot_data(data):
         plt.title(f"b={b}")
         plt.legend()
         plt.show()
+
+def plot_best_difference(data, optimal_score):
+
+    fig, ax = plt.subplots()
+    for a in data:
+
+        means = []
+        yerrors = []
+
+        for b in data[a]:
+
+            score_results = data[a][b]
+            diffs = [min(scores) - optimal_score for scores in score_results]
+
+            means.append(np.mean(diffs))
+            yerrors.append(np.std(diffs))
+
+        plt.errorbar(data[a].keys(), means, yerr=yerrors, label=f"a={a}", capsize=5)
+
+    ax.set_title("Difference between optimal and calculated path length")
+    ax.set_xlabel("b")
+    ax.set_ylabel("Distance difference")
+
+    ax.set_yscale("log")
+    ax.set_xscale("log")
+
+    plt.legend()
+    plt.show()
+            
